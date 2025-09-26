@@ -3,22 +3,334 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Soma Simples</title>
-    <link rel="stylesheet" href="css/style.css">
+    <title>Curso de Gerência de Configuração de Software (SCM)</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* --- Reset Básico e Estilos Globais --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f4f7fc;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: auto;
+            padding: 0 20px;
+        }
+
+        section {
+            padding: 60px 0;
+        }
+
+        h1, h2, h3 {
+            color: #1a253c;
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            font-size: 2.2rem;
+            text-align: center;
+        }
+        
+        p {
+            margin-bottom: 15px;
+            color: #555;
+        }
+
+        /* --- Cabeçalho (Hero Section) --- */
+        .hero {
+            background: linear-gradient(rgba(26, 37, 60, 0.8), rgba(26, 37, 60, 0.8)), url('https://images.unsplash.com/photo-1542744173-8e7e53415bb0?auto=format&fit=crop&q=80&w=2070') no-repeat center center/cover;
+            color: #fff;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 20px;
+        }
+
+        .hero-content {
+            max-width: 800px;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            color: #fff;
+            margin-bottom: 15px;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            font-weight: 300;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: #0067ff;
+            color: #fff;
+            padding: 15px 35px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color: #0052cc;
+            transform: translateY(-3px);
+        }
+
+        /* --- Seção de Módulos/Conteúdo --- */
+        #modulos .grid-modulos {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-top: 40px;
+        }
+
+        .modulo-card {
+            background: #fff;
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .modulo-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+        }
+
+        .modulo-card .icon {
+            font-size: 2.5rem;
+            color: #0067ff;
+            margin-bottom: 15px;
+        }
+        
+        .modulo-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+        }
+
+        /* --- Seção Sobre o Curso e Público-Alvo --- */
+        .sobre-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .sobre-grid img {
+            max-width: 100%;
+            border-radius: 8px;
+        }
+
+        /* --- Seção do Instrutor --- */
+        #instrutor {
+            background-color: #ffffff;
+        }
+
+        .instrutor-content {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+        }
+
+        .instrutor-content img {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            object-fit: cover;
+            box-shadow: 0 0 20px rgba(0,103,255,0.3);
+        }
+
+        .instrutor-bio h3 {
+            font-size: 1.8rem;
+        }
+        
+        .instrutor-bio .cargo {
+            font-style: italic;
+            color: #0067ff;
+            margin-bottom: 15px;
+        }
+
+        /* --- Seção de Inscrição (CTA Final) --- */
+        #inscricao {
+            text-align: center;
+        }
+
+        #inscricao .preco {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #0067ff;
+            margin: 20px 0;
+        }
+
+        #inscricao .preco span {
+            font-size: 1rem;
+            font-weight: 400;
+            color: #555;
+        }
+
+        /* --- Rodapé --- */
+        footer {
+            background-color: #1a253c;
+            color: #fff;
+            text-align: center;
+            padding: 20px 0;
+        }
+        
+        footer a {
+            color: #0067ff;
+            text-decoration: none;
+        }
+
+        /* --- Responsividade --- */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            h2 {
+                font-size: 1.8rem;
+            }
+
+            .sobre-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .instrutor-content {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+    </style>
 </head>
-
 <body>
-    <div class="container">
-        <h1>Calculadora de Soma</h1>
-        <input type="number" id="valor1" placeholder="Digite o primeiro valor">
 
-        <input type="number" id="valor2" placeholder="Digite o segundo valor">
+    <header class="hero">
+        <div class="hero-content">
+            <h1>Curso Completo de Gerência de Configuração de Software (SCM)</h1>
+            <p>Domine as ferramentas e processos essenciais para controlar versões, automatizar builds e garantir a integridade do seu software.</p>
+            <a href="#inscricao" class="btn">Inscreva-se Agora</a>
+        </div>
+    </header>
 
-        <button onclick="somar()">Somar</button>
+    <main>
+        <section id="sobre" class="container">
+            <h2>O que é Gerência de Configuração de Software?</h2>
+            <div class="sobre-grid">
+                <div class="sobre-texto">
+                    <p>A Gerência de Configuração de Software (SCM) é a disciplina que organiza, controla e gerencia as evoluções de artefatos em um projeto de software. É a base para a entrega contínua, integração e para a colaboração eficiente em equipes de desenvolvimento.</p>
+                    <p>Neste curso, você sairá do zero e aprenderá na prática como implementar um processo de SCM robusto, utilizando as ferramentas mais modernas do mercado como Git, Docker e Jenkins, garantindo qualidade e rastreabilidade em todo o ciclo de vida do desenvolvimento.</p>
+                </div>
+                <div class="sobre-img">
+                    <img src="https://images.unsplash.com/photo-1610563166126-309af6a85859?auto=format&fit=crop&q=80&w=2070" alt="Código em um editor">
+                </div>
+            </div>
+        </section>
 
-        <h2 id="resultado">O resultado aparecerá aqui</h2>
+        <section id="modulos" class="container">
+            <h2>O que você vai aprender?</h2>
+            <div class="grid-modulos">
+                <div class="modulo-card">
+                    <div class="icon">⚙️</div>
+                    <h3>Fundamentos de SCM</h3>
+                    <p>Entenda os conceitos chave: versionamento, baselines, controle de mudanças e auditoria de configuração.</p>
+                </div>
+                <div class="modulo-card">
+                    <div class="icon">🌿</div>
+                    <h3>Git e Controle de Versão</h3>
+                    <p>Domine o Git, desde comandos básicos até estratégias avançadas de branching como GitFlow e Trunk-Based Development.</p>
+                </div>
+                <div class="modulo-card">
+                    <div class="icon">🚀</div>
+                    <h3>Automação e CI/CD</h3>
+                    <p>Aprenda a criar pipelines de integração e entrega contínua com Jenkins para automatizar builds, testes e deploys.</p>
+                </div>
+                <div class="modulo-card">
+                    <div class="icon">📦</div>
+                    <h3>Gerenciamento de Dependências</h3>
+                    <p>Utilize ferramentas como Maven, npm e Docker para gerenciar bibliotecas e criar ambientes consistentes.</p>
+                </div>
+                <div class="modulo-card">
+                    <div class="icon">📊</div>
+                    <h3>Infraestrutura como Código (IaC)</h3>
+                    <p>Descubra como versionar e gerenciar sua infraestrutura utilizando ferramentas como Terraform e Ansible.</p>
+                </div>
+                <div class="modulo-card">
+                    <div class="icon">📈</div>
+                    <h3>Estratégias e Melhores Práticas</h3>
+                    <p>Aprenda a implementar e escalar um processo de SCM em projetos de diferentes tamanhos e complexidades.</p>
+                </div>
+            </div>
+        </section>
 
-    </div> <script src="js/script.js"></script>
+        <section id="publico" class="container">
+            <div class="sobre-grid">
+                <div class="sobre-img">
+                    <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&q=80&w=2070" alt="Equipe de desenvolvimento colaborando">
+                </div>
+                <div class="sobre-texto">
+                    <h2>Para quem é este curso?</h2>
+                    <p>Este curso foi desenhado para uma variedade de profissionais que desejam aprimorar a qualidade e a eficiência de seus projetos de software:</p>
+                    <ul>
+                        <li>Desenvolvedores de Software</li>
+                        <li>Engenheiros de DevOps e SRE</li>
+                        <li>Analistas de QA e Testadores</li>
+                        <li>Gerentes de Projetos e Líderes Técnicos</li>
+                        <li>Estudantes de tecnologia que buscam um diferencial</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="instrutor">
+            <div class="container instrutor-content">
+                <img src="https://images.unsplash.com/photo-1557862921-37829c790f19?auto=format&fit=crop&q=80&w=2071" alt="Foto do Instrutor">
+                <div class="instrutor-bio">
+                    <h3>Seu Instrutor: Nome do Instrutor</h3>
+                    <p class="cargo">Especialista em DevOps e SCM</p>
+                    <p>Com mais de 10 anos de experiência na indústria de software, [Nome do Instrutor] ajudou dezenas de empresas a otimizarem seus processos de desenvolvimento. É apaixonado por automação e por construir sistemas resilientes e escaláveis.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="inscricao" class="container">
+            <h2>Faça sua Inscrição</h2>
+            <p>Garanta sua vaga e transforme a maneira como você gerencia projetos de software.</p>
+            <div class="preco">
+                R$ 497,00 <br>
+                <span>Acesso vitalício e certificado de conclusão.</span>
+            </div>
+            <a href="#" class="btn">Quero me Inscrever Agora!</a>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Nome da Sua Empresa. Todos os direitos reservados. Feito com ❤️ por <a href="#">Seu Nome</a>.</p>
+        </div>
+    </footer>
+
 </body>
-
 </html>
