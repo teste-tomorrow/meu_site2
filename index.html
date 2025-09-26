@@ -3,154 +3,358 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Curso de Gerência de Configuração de Software</title>
+    <title>Curso Avançado de Gerência de Configuração de Software</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
     <style>
-        /* Estilos Gerais */
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        /* ========================================
+        CSS Reset & Variáveis de Cor
+        ========================================
+        */
+        :root {
+            --dark-bg: #12121c;
+            --primary-blue: #00aaff;
+            --light-text: #f0f0f0;
+            --secondary-text: #a0a0a0;
+            --card-bg: #1e1e2c;
+            --border-color: #333344;
+        }
+
+        * {
             margin: 0;
             padding: 0;
-            background-color: #f4f7f6;
-            color: #333;
-            line-height: 1.6;
+            box-sizing: border-box;
         }
 
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--dark-bg);
+            color: var(--light-text);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        /* ========================================
+        Estilos Gerais e Utilitários
+        ========================================
+        */
         .container {
-            max-width: 960px;
-            margin: auto;
-            overflow: hidden;
-            padding: 0 2rem;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 30px;
         }
 
-        /* Cabeçalho */
-        header {
-            background: #fff;
-            padding: 2rem 0;
-            text-align: center;
-            border-bottom: 1px solid #ddd;
+        section {
+            padding: 80px 0;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
         }
 
-        header h1 {
-            font-size: 2.5rem;
-            color: #2c3e50;
-            margin-bottom: 0.5rem;
+        section.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
 
-        header p {
-            font-size: 1.2rem;
-            color: #7f8c8d;
-        }
-
-        /* Seção Principal (Hero) */
-        .hero {
-            background: linear-gradient(to right, #6dd5ed, #2193b0);
-            color: #fff;
-            padding: 4rem 0;
-            text-align: center;
-        }
-
-        .hero h2 {
+        .section-title {
             font-size: 2.8rem;
-            margin-bottom: 1rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 60px;
+            color: var(--light-text);
         }
-
-        .hero p {
-            font-size: 1.3rem;
-            margin-bottom: 2rem;
+        
+        .section-title span {
+            color: var(--primary-blue);
         }
 
         .btn {
             display: inline-block;
-            background: #f1c40f;
-            color: #2c3e50;
-            padding: 0.8rem 1.5rem;
+            background: var(--primary-blue);
+            color: var(--dark-bg);
+            padding: 14px 28px;
+            font-size: 1rem;
+            font-weight: 600;
             text-decoration: none;
-            border-radius: 5px;
-            font-weight: bold;
-            transition: background-color 0.3s ease;
+            border-radius: 50px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
         .btn:hover {
-            background: #f39c12;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 170, 255, 0.2);
         }
 
-        /* Seções de Conteúdo */
-        section {
-            padding: 4rem 0;
-        }
-
-        section h3 {
-            font-size: 2rem;
-            text-align: center;
-            margin-bottom: 2rem;
-            color: #2c3e50;
-        }
-
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-        }
-
-        .card {
-            background: #fff;
-            padding: 2rem;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-            text-align: center;
-        }
-
-        .card i {
-            font-size: 2.5rem;
-            color: #2193b0;
-            margin-bottom: 1rem;
-        }
-
-        .card h4 {
-            font-size: 1.3rem;
-            margin-bottom: 0.5rem;
-        }
-
-        /* Tópicos do Curso */
-        .topics-list {
-            list-style: none;
-            padding: 0;
+        /* ========================================
+        Cabeçalho (Hero Section)
+        ========================================
+        */
+        .hero {
+            min-height: 100vh;
             display: flex;
-            flex-wrap: wrap;
+            align-items: center;
             justify-content: center;
-            gap: 1rem;
+            text-align: center;
+            background: linear-gradient(rgba(18, 18, 28, 0.8), rgba(18, 18, 28, 1)), url('https://images.unsplash.com/photo-1542831371-29b0f74f9713?auto=format&fit=crop&w=1200&q=80') no-repeat center center/cover;
         }
 
-        .topics-list li {
-            background: #eaf2f8;
-            color: #2c3e50;
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
-            font-size: 0.9rem;
+        .hero-content h1 {
+            font-size: 4rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            line-height: 1.2;
         }
 
+        .hero-content p {
+            font-size: 1.3rem;
+            font-weight: 300;
+            color: var(--secondary-text);
+            max-width: 700px;
+            margin: 0 auto 40px;
+        }
 
-        /* Chamada para Ação */
-        .cta {
-            background: #2c3e50;
-            color: #fff;
+        /* ========================================
+        Seção de Aprendizado
+        ========================================
+        */
+        #aprendizado {
+            background-color: var(--card-bg);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .feature-item {
+            background-color: var(--dark-bg);
+            padding: 30px;
+            border-radius: 10px;
+            border: 1px solid var(--border-color);
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+
+        .feature-item:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary-blue);
+        }
+
+        .feature-item i {
+            font-size: 2.5rem;
+            color: var(--primary-blue);
+            margin-bottom: 20px;
+        }
+
+        .feature-item h3 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+
+        .feature-item p {
+            color: var(--secondary-text);
+        }
+
+        /* ========================================
+        Seção do Instrutor
+        ========================================
+        */
+        .instructor-layout {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+        }
+        
+        .instructor-img {
+            flex-basis: 300px;
+            flex-shrink: 0;
+        }
+
+        .instructor-img img {
+            width: 100%;
+            border-radius: 50%;
+            border: 5px solid var(--primary-blue);
+        }
+
+        .instructor-bio h3 {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        .instructor-bio .title {
+            font-size: 1.1rem;
+            color: var(--primary-blue);
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .instructor-bio p {
+            color: var(--secondary-text);
+            margin-bottom: 15px;
+        }
+
+        /* ========================================
+        Seção de Inscrição (CTA)
+        ========================================
+        */
+        #inscricao {
+            background-color: var(--card-bg);
             text-align: center;
         }
 
-        /* Rodapé */
+        .cta-card {
+            background-color: var(--dark-bg);
+            padding: 60px 40px;
+            border-radius: 15px;
+            border: 1px solid var(--border-color);
+            max-width: 800px;
+            margin: 0 auto;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+        }
+
+        .cta-card h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        .cta-card p {
+            font-size: 1.1rem;
+            color: var(--secondary-text);
+            margin-bottom: 40px;
+        }
+
+        /* ========================================
+        Rodapé
+        ========================================
+        */
         footer {
-            background: #34495e;
-            color: #fff;
             text-align: center;
-            padding: 2rem 0;
+            padding: 40px 0;
+            border-top: 1px solid var(--border-color);
+        }
+
+        footer p {
+            color: var(--secondary-text);
+        }
+
+        /* ========================================
+        Responsividade
+        ========================================
+        */
+        @media (max-width: 768px) {
+            .hero-content h1 {
+                font-size: 2.8rem;
+            }
+            .hero-content p {
+                font-size: 1.1rem;
+            }
+            .section-title {
+                font-size: 2.2rem;
+            }
+            .instructor-layout {
+                flex-direction: column;
+                text-align: center;
+            }
+            .instructor-img {
+                margin-bottom: 30px;
+                max-width: 200px;
+            }
         }
 
     </style>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
 
-    <header>
+    <section class="hero visible">
+        <div class="container hero-content">
+            <h1>Domine o Futuro do Desenvolvimento com Gerência de Configuração</h1>
+            <p>Aprenda as práticas, ferramentas e estratégias essenciais para automatizar, controlar e escalar qualquer projeto de software com confiança.</p>
+            <a href="#inscricao" class="btn">Inscreva-se Agora</a>
+        </div>
+    </section>
+
+    <section id="aprendizado">
         <div class="container">
-            <h1>Curso de Gerência de Configuração de Software</h1>
-            <p>
+            <h2 class="section-title">O que você vai <span>Dominar</span></h2>
+            <div class="features-grid">
+                <div class="feature-item">
+                    <i class="fa-brands fa-git-alt"></i>
+                    <h3>Versionamento Avançado</h3>
+                    <p>Controle total sobre seu código com Git, dominando workflows como Git Flow, branching, merging e resolução de conflitos.</p>
+                </div>
+                <div class="feature-item">
+                    <i class="fa-solid fa-robot"></i>
+                    <h3>Automação e CI/CD</h3>
+                    <p>Crie pipelines de Integração e Entrega Contínua (CI/CD) com ferramentas como Jenkins e GitLab CI para builds e deploys automáticos.</p>
+                </div>
+                <div class="feature-item">
+                    <i class="fa-solid fa-server"></i>
+                    <h3>Infraestrutura como Código</h3>
+                    <p>Gerencie e provisione sua infraestrutura de forma declarativa e versionada usando ferramentas como Ansible e Terraform.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="instrutor">
+        <div class="container">
+            <h2 class="section-title">Conheça seu <span>Instrutor</span></h2>
+            <div class="instructor-layout">
+                <div class="instructor-img">
+                    <img src="https://via.placeholder.com/300" alt="Foto do Instrutor">
+                </div>
+                <div class="instructor-bio">
+                    <h3>Nome do Instrutor</h3>
+                    <p class="title">Especialista em DevOps & SCM</p>
+                    <p>Com mais de 10 anos de experiência liderando equipes de desenvolvimento e operações em empresas de tecnologia, [Nome do Instrutor] é apaixonado por otimizar processos e garantir a qualidade do software desde a sua concepção até a entrega final.</p>
+                    <p>Neste curso, ele compartilha o conhecimento prático e as estratégias que o ajudaram a escalar sistemas complexos e a construir culturas de engenharia de alta performance.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="inscricao">
+        <div class="container">
+            <div class="cta-card">
+                <h2>Torne-se um Especialista</h2>
+                <p>Vagas limitadas. Garanta seu lugar e dê o próximo passo decisivo na sua carreira em tecnologia.</p>
+                <a href="#" class="btn">Quero Garantir Minha Vaga</a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Seu Nome ou Empresa. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <script>
+        const sections = document.querySelectorAll('section');
+
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, {
+            threshold: 0.1
+        });
+
+        sections.forEach(section => {
+            observer.observe(section);
+        });
+    </script>
+
+</body>
+</html>
